@@ -112,10 +112,13 @@ struct ContentView: View {
                     .frame(maxWidth: 640)
                     .scrollContentBackground(.hidden)
                 } //:  VSTACK
+                .blur(radius: showNewTaskItem ? 8.0 : 0, opaque: false)
+                .transition(.move(edge: .bottom))
+                .animation(.easeOut, value: 0.5)
                 
                 // MARK: - NEW TASK ITEM
                 if showNewTaskItem {
-                    BlankView()
+                    BlankView(backgroundColor: isDarkMode ?  Color.black : Color.gray, backgroundOpacity: isDarkMode ? 0.3 : 0.5)
                         .onTapGesture {
                             withAnimation {
                                 showNewTaskItem = false
@@ -131,6 +134,7 @@ struct ContentView: View {
             .navigationBarHidden(true)
             .background(
             BackgroundImageView()
+                .blur(radius: showNewTaskItem ? 8.0 : 0, opaque: false)
             )
             .background(
                 backgroundGradient.ignoresSafeArea(.all)
